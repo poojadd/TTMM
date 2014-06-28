@@ -13,7 +13,11 @@ class EventsController < ApplicationController
   end
 
   def settle
-    @event_total = Event.total()
+    Event.update_all(:settled => true)
+    @balance = Balance.all
+    @events = Event.unsettled
+
+    render :index
   end
 
   # GET /events/new

@@ -1,5 +1,8 @@
 Ttmm::Application.routes.draw do
-  resources :events
+  resources :events do
+    get :settle, on: :collection
+    get :clear_all
+  end
 
   resources :event_types
 
@@ -10,6 +13,7 @@ Ttmm::Application.routes.draw do
   # You can have the root of your site routed with "root"
   root 'events#index'
 
+  resources :balances, only: [:destroy]
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

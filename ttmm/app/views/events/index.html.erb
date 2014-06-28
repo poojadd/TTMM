@@ -40,4 +40,10 @@
 
 <%= link_to 'New Event', new_event_path %>
 
-<%= link_to 'Settle Events', new_event_path %>
+<%= link_to 'Settle Events', settle_events_path %>
+
+<% if !@balance.blank? %>
+    <%= render 'balance' %>
+<% else %>
+    <div><p>No pending Events.</p></div>
+<% end %>
