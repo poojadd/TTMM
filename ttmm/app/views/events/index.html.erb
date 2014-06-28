@@ -6,8 +6,9 @@
       <th>Event type</th>
       <th>Date</th>
       <% %>
-      <th>User</th>
+      <th>Total Users Attended</th>
       <th>Total Amount</th>
+      <th>Amount Paid</th>
       <th>Location</th>
       <th></th>
       <th></th>
@@ -22,6 +23,10 @@
         <td><%= event.date %></td>
         <td><%= event.users.count %></td>
         <td><%= event.amount %></td>
+        <td><% event.event_transactions.each do |et|  %>
+          <%= "#{et.user.email}:#{et.paid}" %><br/>
+              <% end %>
+        </td>
         <td><%= event.location %></td>
         <td><%= link_to 'Show', event %></td>
         <td><%= link_to 'Edit', edit_event_path(event) %></td>
@@ -34,3 +39,5 @@
 <br>
 
 <%= link_to 'New Event', new_event_path %>
+
+<%= link_to 'Settle Events', new_event_path %>

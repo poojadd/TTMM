@@ -11,7 +11,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140628110314) do
+ActiveRecord::Schema.define(version: 20140628122557) do
+
+  create_table "balances", force: true do |t|
+    t.integer  "borrower_id"
+    t.integer  "lender_id"
+    t.float    "amount"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "event_transactions", force: true do |t|
     t.integer  "event_id"
@@ -20,6 +28,7 @@ ActiveRecord::Schema.define(version: 20140628110314) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "attended"
+    t.float    "debt"
   end
 
   create_table "event_types", force: true do |t|
@@ -37,6 +46,7 @@ ActiveRecord::Schema.define(version: 20140628110314) do
     t.string   "location"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "settled",       default: false
   end
 
   create_table "users", force: true do |t|
