@@ -1,6 +1,7 @@
 
 <div class="field">
   <%= f.object.user.email %>
+  <%= f.hidden_field :user_id %>
   <%= f.text_field :paid %>
   <%= f.check_box :attended %>
 </div>
