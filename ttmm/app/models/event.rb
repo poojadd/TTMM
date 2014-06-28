@@ -77,9 +77,8 @@ class Event < ActiveRecord::Base
     self.where(settled: false)
   end
 
-  def self.settle
-
-
+  def self.settled
+    self.where(settled: true)
   end
 
   def users_count

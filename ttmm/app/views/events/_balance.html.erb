@@ -1,0 +1,21 @@
+<table>
+  <thead>
+  <tr>
+
+    <th>Borrower</th>
+    <th>Lender</th>
+    <th>Amount</th>
+    <th></th>
+  </tr>
+  </thead>
+
+  <% @balance.each do |b| %>
+      <tr>
+        <td><%= b.borrower_user.email %> </td>
+        <td><%= b.lender_user.email %></td>
+        <td><%= b.amount %></td>
+        <th><%= link_to 'Delete', balance_path(b), :method => :delete,data: { confirm: 'Are you sure?' }  %> </th>
+      </tr>
+
+  <% end %>
+</table>

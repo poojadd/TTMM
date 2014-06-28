@@ -15,9 +15,8 @@ class EventsController < ApplicationController
   def settle
     Event.update_all(:settled => true)
     @balance = Balance.all
-    @events = Event.unsettled
-
-    render :index
+    @events = Event.settled
+    render :setteled_event
   end
 
   # GET /events/new
