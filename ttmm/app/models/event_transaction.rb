@@ -4,4 +4,5 @@ class EventTransaction < ActiveRecord::Base
 
   belongs_to :event
   belongs_to :user
+  validates :paid,:numericality => true, allow_blank: true
 end

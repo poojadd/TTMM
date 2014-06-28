@@ -1,0 +1,46 @@
+<h1>Listing Setteled events</h1>
+
+<table>
+  <thead>
+  <tr>
+    <th>Event type</th>
+    <th>Date</th>
+    <% %>
+    <th>Total Users Attended</th>
+    <th>Total Amount</th>
+    <th>Amount Paid</th>
+    <th>Location</th>
+    <th></th>
+    <th></th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <% @events.each do |event| %>
+      <tr>
+        <td><%= event.event_type.name %></td>
+        <td><%= event.date.in_time_zone('Asia/Kolkata').strftime("%d %B %Y at %I:%M %p") %></td>
+        <td><%= event.users.count %></td>
+        <td><%= event.amount %></td>
+        <td><% event.event_transactions.each do |et|  %>
+              <%= "#{et.user.email}:#{et.paid}" %><br/>
+          <% end %>
+        </td>
+        <td><%= event.location %></td>
+        <td><%= link_to 'Show', event %></td>
+        <td><%= link_to 'Destroy', event, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+  <% end %>
+  </tbody>
+</table>
+
+<br>
+<h3> Balance</h3>
+
+<% if !@balance.blank? %>
+    <%= render 'balance' %>
+<% else %>
+    <div><p>No pending Events.</p></div>
+<% end %>
+
+<%= link_to 'Events', events_path %>
