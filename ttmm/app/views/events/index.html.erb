@@ -1,47 +1,48 @@
 <h1>Listing events</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Event type</th>
-      <th>Date</th>
-      <% %>
-      <th>Total Users Attended</th>
-      <th>Total Amount</th>
-      <th>Amount Paid</th>
-      <th>Location</th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @events.each do |event| %>
+<% if @events.blank? %>
+<p>There is no pending events. </p>
+<% else %>
+    <table>
+      <thead>
       <tr>
-        <td><%= event.event_type.name %></td>
-        <td><%= event.date.in_time_zone('Asia/Kolkata').strftime("%d %B %Y at %I:%M %p") %></td>
-        <td><%= event.users.count %></td>
-        <td><%= event.amount %></td>
-        <td><% event.event_transactions.each do |et|  %>
-          <%= "#{et.user.email}:#{et.paid}" %><br/>
-              <% end %>
-        </td>
-        <td><%= event.location %></td>
-        <td><%= link_to 'Show', event %></td>
-        <td><%= link_to 'Edit', edit_event_path(event) %></td>
+        <th>Event type</th>
+        <th>Date</th>
+        <% %>
+        <th>Total Users Attended</th>
+        <th>Total Amount</th>
+        <th>Amount Paid</th>
+        <th>Location</th>
+        <th></th>
+        <th></th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+      </thead>
 
-<br>
+      <tbody>
+      <% @events.each do |event| %>
+          <tr>
+            <td><%= event.event_type.name %></td>
+            <td><%= event.date.in_time_zone('Asia/Kolkata').strftime("%d %B %Y at %I:%M %p") %></td>
+            <td><%= event.users.count %></td>
+            <td><%= event.amount %></td>
+            <td><% event.event_transactions.each do |et|  %>
+                  <% if et.attended %>
+                  <%= "#{et.user.email}:#{et.paid}" %><br/>
+                  <% end %>
+              <% end %>
+            </td>
+            <td><%= event.location %></td>
+            <td><%= link_to 'Show', event %></td>
+            <td><%= link_to 'Edit', edit_event_path(event) %></td>
+          </tr>
+      <% end %>
+      </tbody>
+    </table>
+
+    <br>
+<% end %>
+
 
 <%= link_to 'New Event', new_event_path %>
 
 <%= link_to 'Settle Events', settle_events_path %>
 
-<% if !@balance.blank? %>
-    <%= render 'balance' %>
-<% else %>
-    <div><p>No pending Events.</p></div>
-<% end %>

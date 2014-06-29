@@ -17,33 +17,36 @@ class Event < ActiveRecord::Base
     @borrower_users.each do |bu|
       chk = bu.debt
       @lender_users.each do |lu|
+        p '-------------------------------'
+        p lu
+        p '-------------------------------'
         if chk != 0
           sum = lu.debt + chk
-          @b = Balance.where(:borrower_id => bu.user_id, :lender_id => lu.user_id)
+          @balance = Balance.where(:borrower_id => bu.user_id, :lender_id => lu.user_id)
           if sum == 0
-            if @b.blank?
+            if @balance.blank?
               Balance.create(:borrower_id => bu.user_id, :lender_id => lu.user_id, :amount => lu.debt)
             else
-              @total = @b.amount + @lu.debt
-              @b.update_attribute(:amount => @total)
+              @total = @balance.first.amount + lu.debt
+              @balance.first.update_attribute(:amount, @total)
             end
             chk = 0
           end
           if sum > 0
-            if @b.blank?
+            if @balance.blank?
               Balance.create(:borrower_id => bu.user_id, :lender_id => lu.user_id, :amount => bu.debt)
             else
-              @total = @b.amount + @bu.debt
-              @b.update_attribute(:amount => @total)
+              @total = @balance.first.amount + bu.debt
+              @balance.first.update_attribute(:amount,@total)
             end
             chk = chk + (bu.debt * -1)
           end
           if sum < 0
-            if @b.blank?
+            if @balance.blank?
               Balance.create(:borrower_id => bu.user_id, :lender_id => lu.user_id, :amount => lu.debt)
             else
-              @total = @b.amount + @lu.debt
-              @b.update_attribute(:amount => @total)
+              @total = @balance.first.amount + lu.debt
+              @balance.first.update_attribute(:amount,@total)
             end
             chk = chk + lu.debt
           end

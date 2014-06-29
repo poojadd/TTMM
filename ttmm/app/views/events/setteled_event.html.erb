@@ -1,5 +1,7 @@
 <h1>Listing Setteled events</h1>
-
+<% if @events.blank? %>
+    <p>There is no events. </p>
+<% else %>
 <table>
   <thead>
   <tr>
@@ -23,7 +25,9 @@
         <td><%= event.users.count %></td>
         <td><%= event.amount %></td>
         <td><% event.event_transactions.each do |et|  %>
-              <%= "#{et.user.email}:#{et.paid}" %><br/>
+              <% if et.attended %>
+                  <%= "#{et.user.email}:#{et.paid}" %><br/>
+              <% end %>
           <% end %>
         </td>
         <td><%= event.location %></td>
@@ -35,6 +39,7 @@
 </table>
 
 <br>
+<% end %>
 <h3> Balance</h3>
 
 <% if !@balance.blank? %>
