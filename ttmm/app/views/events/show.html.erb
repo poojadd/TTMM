@@ -11,10 +11,14 @@
 </p>
 
 <p>
-  <strong>User:</strong>
-  <%= @event.user_id %>
+  <strong>Total User:</strong>
+  <%= @event.users.count %>
 </p>
-
+<% @event.event_transactions.each do |et|  %>
+    <% if et.attended %>
+    <p>    <%= "#{et.user.email}:#{et.paid}" %><br/> </p>
+    <% end %>
+<% end %>
 <p>
   <strong>Amount:</strong>
   <%= @event.amount %>
