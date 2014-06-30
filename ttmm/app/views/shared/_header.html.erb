@@ -1,0 +1,23 @@
+<div>
+  <div style="float: left; margin-bottom: 15px; margin-left: 15px;">
+    <%= link_to(image_tag("images2.jpeg"), root_path, :class => "logo") %>
+  </div>
+  <div style="float: right; width: 80%; vertical-align: bottom;">
+
+    <div style="text-align: right; padding-top: 10px; vertical-align: bottom; height: 77px;">
+      Welcome <%= user_signed_in? ?  link_to("#{current_user.name}",edit_user_registration_path)  : "Guest" %> |
+     <span>
+          <% unless user_signed_in? %>
+              <%= link_to "Sign up", new_user_registration_path %> |
+           <%= link_to "log in", new_user_session_path %>
+          <% else %>
+           <%= link_to "Log out", destroy_user_session_path, :method => :delete %>
+          <% end %>
+     </span>
+    </div>
+
+    <!-- /.navbar -->
+  </div>
+</div>
+
+
