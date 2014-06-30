@@ -1,8 +1,12 @@
-<h1>Listing Setteled events</h1>
-<% if @events.blank? %>
+
+<div class="container-fluid">
+  <div class="row-fluid">
+
+  <% if @events.blank? %>
     <p>There is no events. </p>
 <% else %>
-<table>
+        <h3>Setteled events</h3>
+<table class="table table-striped custab table-bordered ">
   <thead>
   <tr>
     <th>Event type</th>
@@ -13,11 +17,11 @@
     <th>Amount Paid</th>
     <th>Location</th>
     <th></th>
-    <th></th>
+
   </tr>
   </thead>
 
-  <tbody>
+
   <% @events.each do |event| %>
       <tr>
         <td><%= event.event_type.name %></td>
@@ -31,11 +35,10 @@
           <% end %>
         </td>
         <td><%= event.location %></td>
-        <td><%= link_to 'Show', event %></td>
-        <td><%= link_to 'Destroy', event, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Show', event %>&nbsp;&nbsp;&nbsp;<%= link_to 'Delete', event, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
   <% end %>
-  </tbody>
+
 </table>
 
 <br>
@@ -48,4 +51,6 @@
     <div><p>No pending Events.</p></div>
 <% end %>
 
-<%= link_to 'Events', events_path %>
+<%= link_to 'Events', events_path, :class => "btn" %>
+    </div>
+    </div>

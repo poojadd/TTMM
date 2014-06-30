@@ -1,8 +1,14 @@
-<h1>Listing events</h1>
+<div class="container-fluid">
+
+  <h3>Events</h3>
+  <div class="row-fluid">
+
 <% if @events.blank? %>
-<p>There is no pending events. </p>
+        <div class="alert alert-info" role="alert">There is no pending events.</div>
+
 <% else %>
-    <table>
+
+    <table class="table table-striped custab table-bordered ">
       <thead>
       <tr>
         <th>Event type</th>
@@ -41,8 +47,9 @@
     <br>
 <% end %>
 
+    <div class="btn-group">
+<%= link_to 'New Event', new_event_path, :class => "btn" %>
 
-<%= link_to 'New Event', new_event_path %>
-
-<%= link_to 'Settle Events', settle_events_path %>
-
+<%= link_to 'Settle Events', settle_events_path, :class => "btn" %>
+</div>
+</div></div>

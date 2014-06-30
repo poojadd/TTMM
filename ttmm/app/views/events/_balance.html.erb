@@ -1,4 +1,4 @@
-<table>
+<table class="table table-striped custab table-bordered ">
   <thead>
   <tr>
 
@@ -14,7 +14,7 @@
         <td><%= b.borrower_user.email %> </td>
         <td><%= b.lender_user.email %></td>
         <td><%= b.amount %></td>
-        <th><%= link_to 'Delete', balance_path(b), :method => :delete,data: { confirm: 'Are you sure?' }  %> </th>
+        <td><%= link_to 'Delete', balance_path(b), :method => :delete,data: { confirm: 'Are you sure?' }  %> </td>
       </tr>
 
   <% end %>
