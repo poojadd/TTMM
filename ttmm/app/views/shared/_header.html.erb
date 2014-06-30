@@ -5,7 +5,7 @@
   <div style="float: right; width: 80%; vertical-align: bottom;">
 
     <div style="text-align: right; padding-top: 10px; vertical-align: bottom; height: 77px;">
-      Welcome <%= user_signed_in? ?  link_to("#{current_user.name}",edit_user_registration_path)  : "Guest" %> |
+      Welcome <%= user_signed_in? ?  link_to("#{current_user.email}",edit_user_registration_path)  : "Guest" %> |
      <span>
           <% unless user_signed_in? %>
               <%= link_to "Sign up", new_user_registration_path %> |
