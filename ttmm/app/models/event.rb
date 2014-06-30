@@ -17,9 +17,6 @@ class Event < ActiveRecord::Base
     @borrower_users.each do |bu|
       chk = bu.debt
       @lender_users.each do |lu|
-        p '-------------------------------'
-        p lu
-        p '-------------------------------'
         if chk != 0
           sum = lu.debt + chk
           @balance = Balance.where(:borrower_id => bu.user_id, :lender_id => lu.user_id)
@@ -34,7 +31,7 @@ class Event < ActiveRecord::Base
           end
           if sum > 0
             if @balance.blank?
-              Balance.create(:borrower_id => bu.user_id, :lender_id => lu.user_id, :amount => bu.debt)
+              Balance.create(:borrower_id => bu.user_id, :lender_id => lu.user_id, :amount => (bu.debt * -1))
             else
               @total = @balance.first.amount + bu.debt
               @balance.first.update_attribute(:amount,@total)
