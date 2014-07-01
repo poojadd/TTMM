@@ -43,9 +43,10 @@
 
 <br>
 <% end %>
-<h3> Balance</h3> <h5> :Borrower has to give $:Amount to :Lender </h5>
+<h3> Balance</h3>
 
 <% if !@balance.blank? %>
+        <h5> :Borrower has to give $:Amount to :Lender </h5>
     <%= render 'balance' %>
 <% else %>
     <div><p>No pending Events.</p></div>

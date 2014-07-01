@@ -33,7 +33,7 @@ class Event < ActiveRecord::Base
             if @balance.blank?
               Balance.create(:borrower_id => bu.user_id, :lender_id => lu.user_id, :amount => (bu.debt * -1))
             else
-              @total = @balance.first.amount + bu.debt
+              @total = @balance.first.amount - bu.debt
               @balance.first.update_attribute(:amount,@total)
             end
             chk = chk + (bu.debt * -1)
